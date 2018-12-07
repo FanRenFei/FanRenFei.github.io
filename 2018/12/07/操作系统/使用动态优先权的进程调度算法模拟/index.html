@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-corner-indicato.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-操作系统,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="实验目的 通过动态优先权算法的模拟加深对进程概念进程调度过程的理解。  实验内容（1）用 C 语言来实现对 N 个进程采用动态优先权优先算法的进程调度。（2）每个用来标识进程的进程控制块 PCB 用结构来描述，包括以下字段： •••• 进程标识数 ID。•••• 进程优先数 PRIORITY，并规定优先数越大的进程，其优先权越高。•••• 进程已占用的 CPU 时间 CPUTIME。•••• 进程">
+<meta name="keywords" content="-操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS实现 使用动态优先权的进程调度算法模拟">
+<meta property="og:url" content="http://jsfei.top/2018/12/07/操作系统/使用动态优先权的进程调度算法模拟/index.html">
+<meta property="og:site_name" content="JSFei">
+<meta property="og:description" content="实验目的 通过动态优先权算法的模拟加深对进程概念进程调度过程的理解。  实验内容（1）用 C 语言来实现对 N 个进程采用动态优先权优先算法的进程调度。（2）每个用来标识进程的进程控制块 PCB 用结构来描述，包括以下字段： •••• 进程标识数 ID。•••• 进程优先数 PRIORITY，并规定优先数越大的进程，其优先权越高。•••• 进程已占用的 CPU 时间 CPUTIME。•••• 进程">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-07T14:38:09.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS实现 使用动态优先权的进程调度算法模拟">
+<meta name="twitter:description" content="实验目的 通过动态优先权算法的模拟加深对进程概念进程调度过程的理解。  实验内容（1）用 C 语言来实现对 N 个进程采用动态优先权优先算法的进程调度。（2）每个用来标识进程的进程控制块 PCB 用结构来描述，包括以下字段： •••• 进程标识数 ID。•••• 进程优先数 PRIORITY，并规定优先数越大的进程，其优先权越高。•••• 进程已占用的 CPU 时间 CPUTIME。•••• 进程">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jsfei.top/2018/12/07/操作系统/使用动态优先权的进程调度算法模拟/">
+
+
+
+
+
+  <title>JS实现 使用动态优先权的进程调度算法模拟 | JSFei</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FanRenFei" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JSFei</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">JSFei的成长之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jsfei.top/2018/12/07/操作系统/使用动态优先权的进程调度算法模拟/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JSFei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JSFei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS实现 使用动态优先权的进程调度算法模拟</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T00:00:00+08:00">
+                2018-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h3><blockquote>
+<p>通过动态优先权算法的模拟加深对进程概念进程调度过程的理解。</p>
+</blockquote>
+<h3 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h3><h5 id="（1）用-C-语言来实现对-N-个进程采用动态优先权优先算法的进程调度。"><a href="#（1）用-C-语言来实现对-N-个进程采用动态优先权优先算法的进程调度。" class="headerlink" title="（1）用 C 语言来实现对 N 个进程采用动态优先权优先算法的进程调度。"></a>（1）用 C 语言来实现对 N 个进程采用动态优先权优先算法的进程调度。</h5><h5 id="（2）每个用来标识进程的进程控制块-PCB-用结构来描述，包括以下字段："><a href="#（2）每个用来标识进程的进程控制块-PCB-用结构来描述，包括以下字段：" class="headerlink" title="（2）每个用来标识进程的进程控制块 PCB 用结构来描述，包括以下字段："></a>（2）每个用来标识进程的进程控制块 PCB 用结构来描述，包括以下字段：</h5><blockquote>
+<p>•••• 进程标识数 ID。<br>•••• 进程优先数 PRIORITY，并规定优先数越大的进程，其优先权越高。<br>•••• 进程已占用的 CPU 时间 CPUTIME。<br>•••• 进程还需占用的 CPU 时间 ALLTIME。当进程运行完毕时，ALLTIME 变为 0。<br>•••• 进程的阻塞时间 STARTBLOCK，表示当进程再运行 STARTBLOCK 个时间片后，将进入阻塞状态。<br>•••• 进程被阻塞的时间 BLOCKTIME，表示已足赛的进程再等待 BLOCKTIME 个时间片后，将转换成就绪状态<br>•••• 进程状态 START。<br>•••• 队列指针 NEXT，用来将 PCB 排成队列。</p>
+</blockquote>
+<h5 id="（3）优先数改变的原则："><a href="#（3）优先数改变的原则：" class="headerlink" title="（3）优先数改变的原则："></a>（3）优先数改变的原则：</h5><blockquote>
+<p>•••进程在就绪队列中呆一个时间片，优先数加 1。<br>•••进程每运行一个时间片，优先数减 3。</p>
+</blockquote>
+<h5 id="（4）假设在调度前，系统中有-5-个进程，它们的初始状态如下："><a href="#（4）假设在调度前，系统中有-5-个进程，它们的初始状态如下：" class="headerlink" title="（4）假设在调度前，系统中有 5 个进程，它们的初始状态如下："></a>（4）假设在调度前，系统中有 5 个进程，它们的初始状态如下：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ID	        0	     1  	 2        3       4</span><br><span class="line">PRIORITY	9	     38	     30	      29	  0</span><br><span class="line">CPUTIME	    0	     0	     0	      0	      0</span><br><span class="line">ALLTIME	    3	     3	     6	      3	      4</span><br><span class="line">STARTBLOCK	2	    -1	     -1	      -1	 -1</span><br><span class="line">BLOCKTIME	3	     0	     0	      0	      0</span><br><span class="line">STATE	   READY	READY	READY	READY	READY</span><br></pre></td></tr></table></figure>
+<h5 id="详细的步骤和思路全部在代码注释中，保证你看一遍就知道代码的意思，阅读起来没有任何难度"><a href="#详细的步骤和思路全部在代码注释中，保证你看一遍就知道代码的意思，阅读起来没有任何难度" class="headerlink" title="详细的步骤和思路全部在代码注释中，保证你看一遍就知道代码的意思，阅读起来没有任何难度"></a>详细的步骤和思路全部在代码注释中，保证你看一遍就知道代码的意思，阅读起来没有任何难度</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br></pre></td><td class="code"><pre><span class="line">//定义一个PCB对象</span><br><span class="line">function PCB(ID, Priority, Cputime, Alltime, Startblock, BlockTime, state) &#123;</span><br><span class="line">    this.ID = ID //进程ID</span><br><span class="line">    this.Priority = Priority //进程优先级</span><br><span class="line">    this.Cputime = Cputime //进程已占用的事件</span><br><span class="line">    this.Alltime = Alltime //进程需要占用的时间</span><br><span class="line">    this.Startblock = Startblock //进程需阻塞时间</span><br><span class="line">    this.BlockTime = BlockTime //进程阻塞的时间</span><br><span class="line">    this.state = state //进程状态</span><br><span class="line">&#125;</span><br><span class="line">//定义五个进程</span><br><span class="line">let One = new PCB(0, 9, 0, 3, 2, 3, &quot;Start&quot;)</span><br><span class="line">let Two = new PCB(1, 38, 0, 3, -1, 0, &quot;Start&quot;)</span><br><span class="line">let Three = new PCB(2, 30, 0, 6, -1, 0, &quot;Start&quot;)</span><br><span class="line">let Four = new PCB(3, 29, 0, 3, -1, 0, &quot;Start&quot;)</span><br><span class="line">let Five = new PCB(4, 0, 0, 4, -1, 0, &quot;Start&quot;)</span><br><span class="line">    //就绪队列</span><br><span class="line">let readyqueue = []</span><br><span class="line">    //阻塞队列</span><br><span class="line">let blockqueue = []</span><br><span class="line">    //临时队列，存储初始队列</span><br><span class="line">let tempqueue = []</span><br><span class="line">    //执行完的队列</span><br><span class="line">let overqueue = []</span><br><span class="line">    //定义一个数组(队列)</span><br><span class="line">readyqueue = [One, Two, Three, Four, Five]</span><br><span class="line">    //正在进行的进程</span><br><span class="line">let runProgress = new PCB()</span><br><span class="line">    // 就绪队列优先权排序</span><br><span class="line">    /**</span><br><span class="line">     * Sort的排序是按照队列各个元素的Priority(也就是优先权排队的)</span><br><span class="line">     * 每次排完以后，优先权最大的在数组后面，这样每次运行主程序只需要</span><br><span class="line">     * 将最后一个拿出来就是要被运行的进程</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">function Sort(start) &#123;</span><br><span class="line">    //sort函数 里面自己写一个函数，用来比较对象内的属性(默认的sort往往是不能够使用的)</span><br><span class="line">    function sortBy(field) &#123;</span><br><span class="line">        return function(a, b) &#123;</span><br><span class="line">            return a[field] - b[field];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    start.sort(sortBy(&quot;Priority&quot;));</span><br><span class="line">    return start</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//定义一个展示的界面</span><br><span class="line">function showWindow(start) &#123;</span><br><span class="line">    let str1 = &apos;&apos;</span><br><span class="line">    let str2 = &apos;&apos;</span><br><span class="line">    let str3 = &quot;&quot;</span><br><span class="line">    let str4 = &quot;&quot;</span><br><span class="line">    let str5 = &quot;&quot;</span><br><span class="line">    let str6 = &quot;&quot;</span><br><span class="line">    let str7 = &quot;&quot;</span><br><span class="line">    for (let i = 0; i &lt; start.length; i++) &#123;</span><br><span class="line">        str1 = str1 + &quot;     &quot; + start[i].ID;</span><br><span class="line">        str2 = str2 + &quot;     &quot; + start[i].Priority;</span><br><span class="line">        str3 = str3 + &quot;     &quot; + start[i].Cputime;</span><br><span class="line">        str4 = str4 + &quot;     &quot; + start[i].Alltime;</span><br><span class="line">        str5 = str5 + &quot;    &quot; + start[i].Startblock;</span><br><span class="line">        str6 = str6 + &quot;     &quot; + start[i].BlockTime;</span><br><span class="line">        str7 = str7 + &quot;   &quot; + start[i].state;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(&quot;------------------------------------------------&quot;)</span><br><span class="line">    console.log(&quot;| ID        &quot; + str1 + &quot;   |&quot;)</span><br><span class="line">    console.log(&quot;| Priority  &quot; + str2 + &quot;   |&quot;)</span><br><span class="line">    console.log(&quot;| Cputime   &quot; + str3 + &quot;   |&quot;)</span><br><span class="line">    console.log(&quot;| AllTime   &quot; + str4 + &quot;   |&quot;)</span><br><span class="line">    console.log(&quot;| StackBlock &quot; + str5 + &quot; |&quot;)</span><br><span class="line">    console.log(&quot;| BlockTime &quot; + str6 + &quot;   |&quot;)</span><br><span class="line">    console.log(&quot;| State   &quot; + str7 + &quot;   |&quot;)</span><br><span class="line">    console.log(&quot;#################################################&quot;)</span><br><span class="line">    showID(&quot;blockqueue&quot;, blockqueue)</span><br><span class="line">    showID(&quot;overqueue&quot;, overqueue)</span><br><span class="line">    console.log(&quot;------------------------------------------------&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function showID(str1, arr) &#123;</span><br><span class="line">    let str = &quot;&quot;</span><br><span class="line">    for (let i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">        str += &quot; &quot; + arr[i].ID</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(str1 + &quot;里面的进程有:&quot; + str)</span><br><span class="line">&#125;</span><br><span class="line">//阻塞队列更新</span><br><span class="line">/**</span><br><span class="line"> * 阻塞队列的更新一共有两个参数，因为阻塞中的进程，如果他的阻塞时间(BlockTime)等于0</span><br><span class="line"> * 意味着它的阻塞时间已经到了，就需要到就绪队列中</span><br><span class="line"> * 进入就绪队列以后就要对就绪队列进行重新排序找出优先权最大的那个</span><br><span class="line"> */</span><br><span class="line">function blockqueueUpdata(blockqueue, readyqueue) &#123;</span><br><span class="line">    if (blockqueue.length != 0) &#123;</span><br><span class="line">        for (item of blockqueue) &#123;</span><br><span class="line">            item.BlockTime--</span><br><span class="line">                if (item.BlockTime == 0) &#123;</span><br><span class="line">                    readyqueue.push(item)</span><br><span class="line">                    blockqueue.pop()</span><br><span class="line">                    readyqueue = Sort(readyqueue)</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//就绪队列更新</span><br><span class="line">/**</span><br><span class="line"> * 对就绪队列的更新，需要明白最后一个进程是不能更新的</span><br><span class="line"> * 因为最后一个进程是优先权最大的那个，那个进程是正在运行的进程，严格意义上说它不算是就绪队列的</span><br><span class="line"> * 所以我们只需要对除了最后一个元素的其他元素进行优先权+1的操作</span><br><span class="line"> */</span><br><span class="line">function readyqueueUpdata(readyqueue) &#123;</span><br><span class="line">    for (let i = 0; i &lt;= readyqueue.length - 2; i++) &#123;</span><br><span class="line">        readyqueue[i].Priority++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//index记录运行个时间片</span><br><span class="line">let index = 0</span><br><span class="line">    //运行一个时间片</span><br><span class="line">function run(readyqueue) &#123;</span><br><span class="line">    readyqueue = Sort(readyqueue) //运行之前 先对就绪队列排序</span><br><span class="line">    console.log(&quot;第&quot; + index + &quot;次&quot;)</span><br><span class="line">        //这个地方展示的结果是每次运行前的结果，变化后的结构在下一次展示中能看到</span><br><span class="line">    showWindow(readyqueue)</span><br><span class="line">        /***</span><br><span class="line">         * 每运行一次  正在运行的进程的优先权-3  所需时间片-1  已占用CPU时间+1</span><br><span class="line">         */</span><br><span class="line">    readyqueue[readyqueue.length - 1].Priority -= 3</span><br><span class="line">    readyqueue[readyqueue.length - 1].Alltime -= 1</span><br><span class="line">    readyqueue[readyqueue.length - 1].Cputime += 1</span><br><span class="line">        //运行完以后需要对就绪队列和阻塞队列进行更新</span><br><span class="line">    readyqueueUpdata(readyqueue)</span><br><span class="line">    blockqueueUpdata(blockqueue, readyqueue)</span><br><span class="line">        /*每次运行都需要把运行进程的的Startblock-1</span><br><span class="line">        Startblock=n表示 该进程在运行n个时间片就会进入阻塞队列</span><br><span class="line">        */</span><br><span class="line">    readyqueue[readyqueue.length - 1].Startblock -= 1</span><br><span class="line">        /*查看就绪队列最后一个(也就是刚刚执行完的优先权最大的那个进程)</span><br><span class="line">                他的时间片是否已经运行完了，如果他的Alltime==0 意味着它</span><br><span class="line">                运行结束，就可以进入结束队列，不需要在就绪队列呆着(不需要</span><br><span class="line">                    进行任何操作，其他进程运行与它无关)</span><br><span class="line">        */</span><br><span class="line">    if (readyqueue[readyqueue.length - 1].Alltime == 0) &#123;</span><br><span class="line">        console.log(readyqueue[readyqueue.length - 1].ID)</span><br><span class="line">        readyqueue[readyqueue.length - 1].state = &quot;Finish&quot;</span><br><span class="line">        overqueue.push(readyqueue.pop())</span><br><span class="line">    &#125;</span><br><span class="line">    // 谁的StartBlock==0 就意味该进程需要进入阻塞队列，不能在就绪队列呆着</span><br><span class="line">    //因为每次对StartBlock-1 都是对就绪队列最后一个进行操作，所以这个只需要比较最后一个</span><br><span class="line">    if (readyqueue.length &gt; 0) &#123;</span><br><span class="line">        if (readyqueue[readyqueue.length - 1].Startblock == 0) &#123;</span><br><span class="line">            readyqueue[readyqueue.length - 1].state = &quot;Block&quot;</span><br><span class="line">            blockqueue.push(readyqueue.pop())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    readyqueue = Sort(readyqueue)</span><br><span class="line">    index++</span><br><span class="line">&#125;</span><br><span class="line">//主函数 k的取值我是随便选的  主要判断就是readyqueue.length</span><br><span class="line">//如果等于0就结束操作，你这k 可以为任何值(需要和while一样就行)</span><br><span class="line">function main(readyqueue) &#123;</span><br><span class="line">    let k = 0</span><br><span class="line">    while (k &lt; 5) &#123;</span><br><span class="line">        run(readyqueue)</span><br><span class="line">        k = 0</span><br><span class="line">        if (readyqueue.length == 0) &#123;</span><br><span class="line">            k = 5</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">main(readyqueue)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>觉得不错的话，可以打赏一下哦</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.png" alt="JSFei 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.png" alt="JSFei 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作系统/" rel="tag"><i class="fa fa-google"></i>
+ -操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/06/JS实现LeetCode算法/实现两个数组的交集/" rel="next" title="JS实现两个数组的交集">
+                <i class="fa fa-chevron-left"></i> JS实现两个数组的交集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/07/JS实现LeetCode算法/移动零/" rel="prev" title="JS实现移动零">
+                JS实现移动零 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5OC8xODA0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/blog.jpg" alt="JSFei">
+            
+              <p class="site-author-name" itemprop="name">JSFei</p>
+              <p class="site-description motion-element" itemprop="description">气不和时少说话，有言必失；心不顺时莫做事，做事必败。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/FanRenFei" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_37288477/article" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验目的"><span class="nav-number">1.</span> <span class="nav-text">实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验内容"><span class="nav-number">2.</span> <span class="nav-text">实验内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）用-C-语言来实现对-N-个进程采用动态优先权优先算法的进程调度。"><span class="nav-number">2.0.1.</span> <span class="nav-text">（1）用 C 语言来实现对 N 个进程采用动态优先权优先算法的进程调度。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）每个用来标识进程的进程控制块-PCB-用结构来描述，包括以下字段："><span class="nav-number">2.0.2.</span> <span class="nav-text">（2）每个用来标识进程的进程控制块 PCB 用结构来描述，包括以下字段：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）优先数改变的原则："><span class="nav-number">2.0.3.</span> <span class="nav-text">（3）优先数改变的原则：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（4）假设在调度前，系统中有-5-个进程，它们的初始状态如下："><span class="nav-number">2.0.4.</span> <span class="nav-text">（4）假设在调度前，系统中有 5 个进程，它们的初始状态如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#详细的步骤和思路全部在代码注释中，保证你看一遍就知道代码的意思，阅读起来没有任何难度"><span class="nav-number">2.0.5.</span> <span class="nav-text">详细的步骤和思路全部在代码注释中，保证你看一遍就知道代码的意思，阅读起来没有任何难度</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JSFei</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="-LeetCode,">
 
 
 
@@ -86,17 +86,18 @@
 
 
 
-<meta name="description" content="气不和时少说话，有言必失；心不顺时莫做事，做事必败。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://jsfei.top/categories/index.html">
+<meta name="description" content="给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。 示例12345s = &amp;quot;leetcode&amp;quot;返回 0.s = &amp;quot;loveleetcode&amp;quot;,返回 2. 代码：这道题读完以后就应该知道，这道题的时间复杂度最小也是 O(n),因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。思路：不存在返回-1 存在返回">
+<meta name="keywords" content="-LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS实现字符串中的第一个唯一字符">
+<meta property="og:url" content="http://jsfei.top/2018/12/07/JS实现LeetCode算法/字符串中的第一个唯一字符/index.html">
 <meta property="og:site_name" content="JSFei">
-<meta property="og:description" content="气不和时少说话，有言必失；心不顺时莫做事，做事必败。">
+<meta property="og:description" content="给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。 示例12345s = &amp;quot;leetcode&amp;quot;返回 0.s = &amp;quot;loveleetcode&amp;quot;,返回 2. 代码：这道题读完以后就应该知道，这道题的时间复杂度最小也是 O(n),因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。思路：不存在返回-1 存在返回">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T10:16:12.842Z">
+<meta property="og:updated_time" content="2018-12-07T05:34:42.916Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类">
-<meta name="twitter:description" content="气不和时少说话，有言必失；心不顺时莫做事，做事必败。">
+<meta name="twitter:title" content="JS实现字符串中的第一个唯一字符">
+<meta name="twitter:description" content="给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。 示例12345s = &amp;quot;leetcode&amp;quot;返回 0.s = &amp;quot;loveleetcode&amp;quot;,返回 2. 代码：这道题读完以后就应该知道，这道题的时间复杂度最小也是 O(n),因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。思路：不存在返回-1 存在返回">
 
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://jsfei.top/categories/">
+  <link rel="canonical" href="http://jsfei.top/2018/12/07/JS实现LeetCode算法/字符串中的第一个唯一字符/">
 
 
 
 
 
-  <title>分类 | JSFei</title>
+  <title>JS实现字符串中的第一个唯一字符 | JSFei</title>
   
 
 
@@ -289,40 +290,238 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jsfei.top/2018/12/07/JS实现LeetCode算法/字符串中的第一个唯一字符/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JSFei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JSFei">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">分类</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 2 个分类
+          <h1 class="post-title" itemprop="name headline">JS实现字符串中的第一个唯一字符</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T00:00:00+08:00">
+                2018-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  524
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
             </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">2</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;leetcode&quot;</span><br><span class="line">返回 0.</span><br><span class="line"></span><br><span class="line">s = &quot;loveleetcode&quot;,</span><br><span class="line">返回 2.</span><br></pre></td></tr></table></figure>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><h5 id="这道题读完以后就应该知道，这道题的时间复杂度最小也是-O-n-因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。"><a href="#这道题读完以后就应该知道，这道题的时间复杂度最小也是-O-n-因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。" class="headerlink" title="这道题读完以后就应该知道，这道题的时间复杂度最小也是 O(n),因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。"></a>这道题读完以后就应该知道，这道题的时间复杂度最小也是 O(n),因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。</h5><h5 id="思路：不存在返回-1-存在返回对应索引，那么就先把这二种情况分开："><a href="#思路：不存在返回-1-存在返回对应索引，那么就先把这二种情况分开：" class="headerlink" title="思路：不存在返回-1 存在返回对应索引，那么就先把这二种情况分开："></a>思路：不存在返回-1 存在返回对应索引，那么就先把这二种情况分开：</h5><h6 id="1-第一种-不存在返回-0-分为二种-空字符串-“”-和-“aabb”-空字符串在算法的开始进行一次判断就可以解决。第二种“aabb”-我们把它归到第二种情况下进行判断。"><a href="#1-第一种-不存在返回-0-分为二种-空字符串-“”-和-“aabb”-空字符串在算法的开始进行一次判断就可以解决。第二种“aabb”-我们把它归到第二种情况下进行判断。" class="headerlink" title="1 第一种 不存在返回 0 分为二种 空字符串 “” 和 “aabb” 空字符串在算法的开始进行一次判断就可以解决。第二种“aabb” 我们把它归到第二种情况下进行判断。"></a>1 第一种 不存在返回 0 分为二种 空字符串 “” 和 “aabb” 空字符串在算法的开始进行一次判断就可以解决。第二种“aabb” 我们把它归到第二种情况下进行判断。</h6><h6 id="2-第二种，我们只需设置一个对象-hashObj-在遍历字符串的时候，判断-hashObj-里面是否存在这个字符，如果不存在，就把这个位置的索引-1-放进去-为什么是加-1-因为第一个字符肯定不存在对象中，那么对象就会保存-0-这个索引，然而索引-0-在下一次判断的时候-Boolean-会把它转换为-fasle，那么他就会不存在，那么这个字符就会被重新赋值"><a href="#2-第二种，我们只需设置一个对象-hashObj-在遍历字符串的时候，判断-hashObj-里面是否存在这个字符，如果不存在，就把这个位置的索引-1-放进去-为什么是加-1-因为第一个字符肯定不存在对象中，那么对象就会保存-0-这个索引，然而索引-0-在下一次判断的时候-Boolean-会把它转换为-fasle，那么他就会不存在，那么这个字符就会被重新赋值" class="headerlink" title="2 第二种，我们只需设置一个对象 hashObj 在遍历字符串的时候，判断 hashObj 里面是否存在这个字符，如果不存在，就把这个位置的索引+1 放进去(为什么是加 1 因为第一个字符肯定不存在对象中，那么对象就会保存 0 这个索引，然而索引 0 在下一次判断的时候 Boolean 会把它转换为 fasle，那么他就会不存在，那么这个字符就会被重新赋值)"></a>2 第二种，我们只需设置一个对象 hashObj 在遍历字符串的时候，判断 hashObj 里面是否存在这个字符，如果不存在，就把这个位置的索引+1 放进去(为什么是加 1 因为第一个字符肯定不存在对象中，那么对象就会保存 0 这个索引，然而索引 0 在下一次判断的时候 Boolean 会把它转换为 fasle，那么他就会不存在，那么这个字符就会被重新赋值)</h6><h6 id="如果存在就把该位置的值改为-2-2-或者其他都行，-2-在这里只是表示这个字符重复的标志而已，但是那些会让判断变为-false-的值不可以-。"><a href="#如果存在就把该位置的值改为-2-2-或者其他都行，-2-在这里只是表示这个字符重复的标志而已，但是那些会让判断变为-false-的值不可以-。" class="headerlink" title="如果存在就把该位置的值改为-2(-2 或者其他都行，-2 在这里只是表示这个字符重复的标志而已，但是那些会让判断变为 false 的值不可以)。"></a>如果存在就把该位置的值改为-2(-2 或者其他都行，-2 在这里只是表示这个字符重复的标志而已，但是那些会让判断变为 false 的值不可以)。</h6><h6 id="遍历结束以后，这时候对-hashObj-进行遍历，找到第一个不是-2-的值-，返回该值就是索引"><a href="#遍历结束以后，这时候对-hashObj-进行遍历，找到第一个不是-2-的值-，返回该值就是索引" class="headerlink" title="遍历结束以后，这时候对 hashObj 进行遍历，找到第一个不是-2 的值 ，返回该值就是索引"></a>遍历结束以后，这时候对 hashObj 进行遍历，找到第一个不是-2 的值 ，返回该值就是索引</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;string&#125; s</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span><br><span class="line">var firstUniqChar = function(s) &#123;</span><br><span class="line">   let hashObj = &#123;&#125;</span><br><span class="line">    let b //存入索引</span><br><span class="line">    if (s == &quot;&quot;) &#123;</span><br><span class="line">        b = -1</span><br><span class="line">    &#125;</span><br><span class="line">    for (let i = 0; i &lt; s.length; i++) &#123;</span><br><span class="line">        if (hashObj[s[i]] &amp;&amp; hashObj[s[i]] != -2) &#123;</span><br><span class="line">            hashObj[s[i]] = -2</span><br><span class="line">        &#125; else if (hashObj[s[i]] != -2) &#123;</span><br><span class="line">            hashObj[s[i]] = i + 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for (let item in hashObj) &#123;</span><br><span class="line">        if (hashObj[item] != -2) &#123;</span><br><span class="line"></span><br><span class="line">            b = (hashObj[item]) - 1</span><br><span class="line">            break;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            b = -1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return b</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>觉得不错的话，可以打赏一下哦</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.png" alt="JSFei 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.png" alt="JSFei 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-google"></i>
+ -LeetCode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/07/JS实现LeetCode算法/只出现一次的数字/" rel="next" title="JS实现只出现一次的数字">
+                <i class="fa fa-chevron-left"></i> JS实现只出现一次的数字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/07/JS实现LeetCode算法/加一/" rel="prev" title="JS实现加一">
+                JS实现加一 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -360,8 +559,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -439,6 +647,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码："><span class="nav-number">2.</span> <span class="nav-text">代码：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#这道题读完以后就应该知道，这道题的时间复杂度最小也是-O-n-因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。"><span class="nav-number">2.0.1.</span> <span class="nav-text">这道题读完以后就应该知道，这道题的时间复杂度最小也是 O(n),因为只要遍历玩整个字符串你才能知道那个字符串才是第一个不重复的字符串。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路：不存在返回-1-存在返回对应索引，那么就先把这二种情况分开："><span class="nav-number">2.0.2.</span> <span class="nav-text">思路：不存在返回-1 存在返回对应索引，那么就先把这二种情况分开：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-第一种-不存在返回-0-分为二种-空字符串-“”-和-“aabb”-空字符串在算法的开始进行一次判断就可以解决。第二种“aabb”-我们把它归到第二种情况下进行判断。"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">1 第一种 不存在返回 0 分为二种 空字符串 “” 和 “aabb” 空字符串在算法的开始进行一次判断就可以解决。第二种“aabb” 我们把它归到第二种情况下进行判断。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-第二种，我们只需设置一个对象-hashObj-在遍历字符串的时候，判断-hashObj-里面是否存在这个字符，如果不存在，就把这个位置的索引-1-放进去-为什么是加-1-因为第一个字符肯定不存在对象中，那么对象就会保存-0-这个索引，然而索引-0-在下一次判断的时候-Boolean-会把它转换为-fasle，那么他就会不存在，那么这个字符就会被重新赋值"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">2 第二种，我们只需设置一个对象 hashObj 在遍历字符串的时候，判断 hashObj 里面是否存在这个字符，如果不存在，就把这个位置的索引+1 放进去(为什么是加 1 因为第一个字符肯定不存在对象中，那么对象就会保存 0 这个索引，然而索引 0 在下一次判断的时候 Boolean 会把它转换为 fasle，那么他就会不存在，那么这个字符就会被重新赋值)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如果存在就把该位置的值改为-2-2-或者其他都行，-2-在这里只是表示这个字符重复的标志而已，但是那些会让判断变为-false-的值不可以-。"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">如果存在就把该位置的值改为-2(-2 或者其他都行，-2 在这里只是表示这个字符重复的标志而已，但是那些会让判断变为 false 的值不可以)。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#遍历结束以后，这时候对-hashObj-进行遍历，找到第一个不是-2-的值-，返回该值就是索引"><span class="nav-number">2.0.2.4.</span> <span class="nav-text">遍历结束以后，这时候对 hashObj 进行遍历，找到第一个不是-2 的值 ，返回该值就是索引</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

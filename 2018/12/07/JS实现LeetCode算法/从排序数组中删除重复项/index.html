@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="-LeetCode,">
 
 
 
@@ -86,17 +86,18 @@
 
 
 
-<meta name="description" content="气不和时少说话，有言必失；心不顺时莫做事，做事必败。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://jsfei.top/categories/index.html">
+<meta name="description" content="给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 112345给定数组 nums = [1,1,2],函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。你不需要考虑数组中超出新长度后面的元素。 示例 212345给定 n">
+<meta name="keywords" content="-LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS实现从排序数组中删除重复项">
+<meta property="og:url" content="http://jsfei.top/2018/12/07/JS实现LeetCode算法/从排序数组中删除重复项/index.html">
 <meta property="og:site_name" content="JSFei">
-<meta property="og:description" content="气不和时少说话，有言必失；心不顺时莫做事，做事必败。">
+<meta property="og:description" content="给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 112345给定数组 nums = [1,1,2],函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。你不需要考虑数组中超出新长度后面的元素。 示例 212345给定 n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T10:16:12.842Z">
+<meta property="og:updated_time" content="2018-12-07T05:34:11.639Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类">
-<meta name="twitter:description" content="气不和时少说话，有言必失；心不顺时莫做事，做事必败。">
+<meta name="twitter:title" content="JS实现从排序数组中删除重复项">
+<meta name="twitter:description" content="给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 112345给定数组 nums = [1,1,2],函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。你不需要考虑数组中超出新长度后面的元素。 示例 212345给定 n">
 
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://jsfei.top/categories/">
+  <link rel="canonical" href="http://jsfei.top/2018/12/07/JS实现LeetCode算法/从排序数组中删除重复项/">
 
 
 
 
 
-  <title>分类 | JSFei</title>
+  <title>JS实现从排序数组中删除重复项 | JSFei</title>
   
 
 
@@ -289,40 +290,245 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jsfei.top/2018/12/07/JS实现LeetCode算法/从排序数组中删除重复项/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JSFei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JSFei">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">分类</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 2 个分类
+          <h1 class="post-title" itemprop="name headline">JS实现从排序数组中删除重复项</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T00:00:00+08:00">
+                2018-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  674
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
             </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">2</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1"></a>示例 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给定数组 nums = [1,1,2],</span><br><span class="line"></span><br><span class="line">函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。</span><br><span class="line"></span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br></pre></td></tr></table></figure>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2"></a>示例 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给定 nums = [0,0,1,1,1,2,2,3,3,4],</span><br><span class="line"></span><br><span class="line">函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。</span><br><span class="line"></span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br></pre></td></tr></table></figure>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝</span><br><span class="line">int len = removeDuplicates(nums);</span><br><span class="line"></span><br><span class="line">// 在函数里修改输入数组对于调用者是可见的。</span><br><span class="line">// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。</span><br><span class="line">for (int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">    print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="解法-1"><a href="#解法-1" class="headerlink" title="解法 1"></a>解法 1</h4><h6 id="指针法，这种方法很容易理解。在函数中我定义了一个变量-i，它的初始位置是在-0，而后它与后面的元素进行比较，如果他与后面的元素不相同，那里指针指向下一位，然后在于比较的元素进行换位。"><a href="#指针法，这种方法很容易理解。在函数中我定义了一个变量-i，它的初始位置是在-0，而后它与后面的元素进行比较，如果他与后面的元素不相同，那里指针指向下一位，然后在于比较的元素进行换位。" class="headerlink" title="指针法，这种方法很容易理解。在函数中我定义了一个变量 i，它的初始位置是在 0，而后它与后面的元素进行比较，如果他与后面的元素不相同，那里指针指向下一位，然后在于比较的元素进行换位。"></a>指针法，这种方法很容易理解。在函数中我定义了一个变量 i，它的初始位置是在 0，而后它与后面的元素进行比较，如果他与后面的元素不相同，那里指针指向下一位，然后在于比较的元素进行换位。</h6><h6 id="如果相同，则定义一个变量来记录数量。当-for-循环结束以后，整个数组后面的-k-个元素全是重复的元素，那么把它们删除得到的数组就是所要求的数组"><a href="#如果相同，则定义一个变量来记录数量。当-for-循环结束以后，整个数组后面的-k-个元素全是重复的元素，那么把它们删除得到的数组就是所要求的数组" class="headerlink" title="如果相同，则定义一个变量来记录数量。当 for 循环结束以后，整个数组后面的 k 个元素全是重复的元素，那么把它们删除得到的数组就是所要求的数组"></a>如果相同，则定义一个变量来记录数量。当 for 循环结束以后，整个数组后面的 k 个元素全是重复的元素，那么把它们删除得到的数组就是所要求的数组</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span><br><span class="line">var removeDuplicates = function(nums) &#123;</span><br><span class="line">    if(nums.length==0) return 0;</span><br><span class="line">    let i=0;</span><br><span class="line">    let k=0;</span><br><span class="line">    for(let j=1;j&lt;nums.length;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(nums[j]!=nums[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    i++;</span><br><span class="line">                    nums[i]=nums[j];</span><br><span class="line">                &#125;</span><br><span class="line">            else</span><br><span class="line">                &#123;k++&#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    nums.splice(nums.length-k,k)</span><br><span class="line">    return i+1</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="解法-2"><a href="#解法-2" class="headerlink" title="解法 2"></a>解法 2</h4><h6 id="利用对象，hash。在遍历数组的时候，如果对象中不存在该数值，就把该数值存放带对象中，并且将元素添加到新数组中，如果存在，则直接跳过"><a href="#利用对象，hash。在遍历数组的时候，如果对象中不存在该数值，就把该数值存放带对象中，并且将元素添加到新数组中，如果存在，则直接跳过" class="headerlink" title="利用对象，hash。在遍历数组的时候，如果对象中不存在该数值，就把该数值存放带对象中，并且将元素添加到新数组中，如果存在，则直接跳过"></a>利用对象，hash。在遍历数组的时候，如果对象中不存在该数值，就把该数值存放带对象中，并且将元素添加到新数组中，如果存在，则直接跳过</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let arr = []</span><br><span class="line">    let hash = &#123;&#125;</span><br><span class="line">    for (let i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">        if (!hash[nums[i]]) &#123;</span><br><span class="line">            hash[nums[i]] = true</span><br><span class="line">            arr.push(nums[i])</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>觉得不错的话，可以打赏一下哦</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixin.png" alt="JSFei 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zhifubao.png" alt="JSFei 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-google"></i>
+ -LeetCode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/07/JS实现LeetCode算法/加一/" rel="next" title="JS实现加一">
+                <i class="fa fa-chevron-left"></i> JS实现加一
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/08/操作系统/动态分区算法首次适应和最佳适应/" rel="prev" title="JS实现 动态分区-首次适应算法和最佳适应算法">
+                JS实现 动态分区-首次适应算法和最佳适应算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -360,8 +566,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -439,6 +654,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-1"><span class="nav-number">1.</span> <span class="nav-text">示例 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例-2"><span class="nav-number">2.</span> <span class="nav-text">示例 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">3.</span> <span class="nav-text">说明:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解法-1"><span class="nav-number">3.1.</span> <span class="nav-text">解法 1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#指针法，这种方法很容易理解。在函数中我定义了一个变量-i，它的初始位置是在-0，而后它与后面的元素进行比较，如果他与后面的元素不相同，那里指针指向下一位，然后在于比较的元素进行换位。"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">指针法，这种方法很容易理解。在函数中我定义了一个变量 i，它的初始位置是在 0，而后它与后面的元素进行比较，如果他与后面的元素不相同，那里指针指向下一位，然后在于比较的元素进行换位。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#如果相同，则定义一个变量来记录数量。当-for-循环结束以后，整个数组后面的-k-个元素全是重复的元素，那么把它们删除得到的数组就是所要求的数组"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">如果相同，则定义一个变量来记录数量。当 for 循环结束以后，整个数组后面的 k 个元素全是重复的元素，那么把它们删除得到的数组就是所要求的数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解法-2"><span class="nav-number">3.2.</span> <span class="nav-text">解法 2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#利用对象，hash。在遍历数组的时候，如果对象中不存在该数值，就把该数值存放带对象中，并且将元素添加到新数组中，如果存在，则直接跳过"><span class="nav-number">3.2.0.1.</span> <span class="nav-text">利用对象，hash。在遍历数组的时候，如果对象中不存在该数值，就把该数值存放带对象中，并且将元素添加到新数组中，如果存在，则直接跳过</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
